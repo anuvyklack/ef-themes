@@ -1,5 +1,5 @@
 #+title: Change log of the Ef Themes
-#+author: Protesilaos Stavrou
+#+author: Protesilaos
 #+email: info@protesilaos.com
 #+options: ':nil toc:nil num:nil author:nil email:nil
 #+startup: content
@@ -11,6 +11,402 @@ The newest release is at the top. For further details, please consult
 the manual: <https://protesilaos.com/emacs/ef-themes>.
 
 #+toc: headlines 1 insert TOC here, with one headline level
+
+* Version 2.2.0 on 2026-06-21
+:PROPERTIES:
+:CUSTOM_ID: h:4b6e7930-4923-4abe-857b-06c81ceeae61
+:END:
+
+This version contains two new themes and several stylistic refinements
+to existing items in the collection.
+
+** Enjoy ~ef-arcadia~ and ~ef-atlantis~ themes
+:PROPERTIES:
+:CUSTOM_ID: h:82467e2d-bb9f-4c35-9a60-8cd1c9c38014
+:END:
+
+~ef-arcadia~ is a light theme with a green, humid feel. ~ef-atlantis~
+is a dark theme with aquatic colours.
+
+** Improved style for ~company~ and ~corfu~ popups
+:PROPERTIES:
+:CUSTOM_ID: h:f999f17e-c84a-411f-89ac-f6154c06f966
+:END:
+
+I have revised the colour that each theme applies to the popup
+background. It should now be more consistent with all other elements
+on display.
+
+Thanks to aikrahguzar for suggesting a review in issue 70:
+<https://github.com/protesilaos/ef-themes/issues/70>.
+
+** The current line highlight for completions is easier to spot
+:PROPERTIES:
+:CUSTOM_ID: h:63ac52ce-21af-4bad-891a-fe041a2d7486
+:END:
+
+This is the background of the selected candidate in the minibuffer
+while using the ~vertico~ package (among other similar interfaces).
+The colours I am now using are more consistent with their context and
+also work better as part of a popup completion interface, as noted
+above.
+
+** Palette refinements for several themes
+:PROPERTIES:
+:CUSTOM_ID: h:ab8b8e17-9838-4789-b16b-32606904b515
+:END:
+
+I have made subtle changes to a few colour values. These are fine
+details. The overarching goal is to be consistent throughout.
+
+* Version 2.1.0 on 2026-01-27
+:PROPERTIES:
+:CUSTOM_ID: h:4b48d1fa-02df-49e3-bf7f-6e3f04c7e84f
+:END:
+
+This version introduces two carefully designed, legible and colourful
+themes: ~ef-orange~ (light) and ~ef-fig~ (dark). Both draw inspiration
+from the fruits they are name after.
+
+The convenience commands ~ef-themes-select-dark~ and
+~ef-themes-select-light~ use the minibuffer to select+load an Ef theme
+that is either dark or light, respectively. The more general command
+is ~ef-themes-select~.
+
+All screen shots of the themes are updated to reflect their current
+status: <https://protesilaos.com/emacs/ef-themes-pictures>.
+
+Remember that since version =2.0.0=, the ~ef-themes~ are built on top
+of my ~modus-themes~. This means that most of the changes happen to
+Modus and are inherited by Ef.
+
+* Version 2.0.0 on 2025-11-09
+:PROPERTIES:
+:CUSTOM_ID: h:c9a336a7-60f9-491e-9d15-884042c4252d
+:END:
+
+The Ef themes are now derived from my Modus themes. This means that
+they inherit the wide face coverage and extensive customisability of
+Modus, while retaining their stylistic flair.
+
+The Ef themes no longer provide any user options of their own. Each of
+the options we had before is now an alias for the Modus equivalent. As
+part of this transition, the Ef themes actually gain new customisation
+options, which are documented herein.
+
+Furthermore, the Ef themes do not define any commands to load a theme.
+What we had before is once again an alias for the equivalent Modus
+command.
+
+The manual of the Ef themes describes these compatibility
+arrangements. Further documentation and code samples are available in
+the manual of the Modus themes:
+
+- Info page :: Evaluate  ~(info "(modus-themes) Top")~.
+- Weg page :: Visit <https://protesilaos.com/emacs/modus-themes>.
+
+** Old user options and hooks are mere aliases for Modus options
+:PROPERTIES:
+:CUSTOM_ID: h:09e9f839-8fa1-4d43-873c-91998adcf652
+:END:
+
+| Old name                           | Is alias for CURRENT NAME             |
+|------------------------------------+---------------------------------------|
+| ef-themes-disable-other-themes     | modus-themes-disable-other-themes     |
+| ef-themes-to-toggle                | modus-themes-to-toggle                |
+| ef-themes-to-rotate                | modus-themes-to-rotate                |
+| ef-themes-italic-constructs        | modus-themes-italic-constructs        |
+| ef-themes-bold-constructs          | modus-themes-bold-constructs          |
+| ef-themes-variable-pitch-ui        | modus-themes-variable-pitch-ui        |
+| ef-themes-mixed-fonts              | modus-themes-mixed-fonts              |
+| ef-themes-headings                 | modus-themes-headings                 |
+| ef-themes-completions              | modus-themes-completions              |
+| ef-themes-prompts                  | modus-themes-prompts                  |
+| ef-themes-common-palette-overrides | modus-themes-common-palette-overrides |
+| ef-themes-post-load-hook           | modus-themes-after-load-theme-hook    |
+| ef-themes-after-load-theme-hook    | modus-themes-after-load-theme-hook    |
+
+Please read their respective documentation strings.
+
+If you use Ef and possibly other Modus derivatives, you may prefer to
+switch all your user options to the Modus ones. This way you can keep
+a unified configuration for all your themes.
+
+** Fewer bold and italic faces by default, more as an opt-in clause
+:PROPERTIES:
+:CUSTOM_ID: h:86dc4817-c48d-4f42-bb16-36608962d41e
+:END:
+
+In the past, the Ef themes did not provide an option to disable the
+extensive use of a bold font weight and italic font slant. Whereas now
+those are controlled by the user options ~modus-themes-bold-constructs~
+and ~modus-themes-italic-constructs~. By default, when they are ~nil~,
+bold and italics are used only when necessary. Set these user options
+to ~t~ to have bold and italics in more places.
+
+** Loading only Ef themes with the convenience wrappers we provide
+:PROPERTIES:
+:CUSTOM_ID: h:00ba7745-7d69-4e96-b81a-b0269d83ce0f
+:END:
+
+All the old commands Ef provided for loading one of its themes will
+still work as before, meaning that they will only ever show and load a
+theme that belongs to the Ef collection.
+
+Internally, these commands are now using the Modus infrastructure and
+are then limiting the set of themes to the Ef collection. They are
+thus convenience wrappers around the equivalent Modus commands.
+
+- ~ef-themes-toggle~
+- ~ef-themes-rotate~
+- ~ef-themes-select~
+- ~ef-themes-load-random~
+- ~ef-themes-load-random-dark~
+- ~ef-themes-load-random-light~
+
+Additionally, the commands ~ef-themes-list-colors~ and
+~ef-themes-list-colors-current~ use the relevant Modus functionality
+under the hood while working only with the Ef themes.
+
+** Combining core Modus themes with all their derivatives
+:PROPERTIES:
+:CUSTOM_ID: h:a51893c3-9a52-4707-8a1e-3ff4642de6cf
+:END:
+
+The minor mode ~modus-themes-include-derivatives-mode~ makes all the
+theme-loading commands that Modus defines consider all core and
+derivative themes. This means that something like ~modus-themes-select~
+will offer ~modus-operandi~ and ~ef-summer~ as two of the many
+possible candidates.
+
+In this scenario, the Modus and Ef collections become part of a larger
+family of themes as opposed to only considering one or the other
+([[#h:00ba7745-7d69-4e96-b81a-b0269d83ce0f][Loading only Ef themes with the convenience wrappers we provide]]).
+Enable ~modus-themes-include-derivatives-mode~ and then access them
+all with the following commands:
+
+- ~modus-themes-toggle~
+- ~modus-themes-rotate~
+- ~modus-themes-select~
+- ~modus-themes-load-random~
+- ~modus-themes-load-random-dark~
+- ~modus-themes-load-random-light~
+- ~modus-themes-list-colors~
+- ~modus-themes-list-colors-current~
+
+Consult the manual of the Modus themes for further details and/or read
+the documentation string of each command.
+
+** Taking over the Modus commands altogether
+:PROPERTIES:
+:CUSTOM_ID: h:7a83bada-a707-4b04-b4a5-fabca1ff245f
+:END:
+
+The minor mode ~ef-themes-take-over-modus-themes-mode~ makes all Modus
+commands that load a theme consider only Ef themes. This is the
+opposite of allowing different theme collections to be blended
+together ([[#h:a51893c3-9a52-4707-8a1e-3ff4642de6cf][Combining core Modus themes with all their derivatives]]).
+It effectively is the same as using one of the convenience wrapper
+commands we already provide ([[#h:00ba7745-7d69-4e96-b81a-b0269d83ce0f][Loading only Ef themes with the convenience wrappers we provide]]).
+
+This minor mode exists to accommodate the needs of users who install
+both the Modus and Ef theme packages (and possibly other Modus
+derivatives). They can maintain a single/shared configuration and then
+decide when to enable ~ef-themes-take-over-modus-themes-mode~ to
+switch to using just the Ef themes.
+
+For example, in the morning the user only wants to consider the Modus
+themes, but during the evening they only likee the Ef themes. In this
+scenario, a key binding to, say, ~modus-themes-rotate~ does not need
+to be updated: it internally reads only Ef themes when
+~ef-themes-take-over-modus-themes-mode~ is enable. When this minor
+mode is disabled, that same key binding will revert to doing what it
+did before (load only a core Modus theme or Modus plus derivatives if
+~modus-themes-include-derivatives-mode~ is enabled).
+
+** More semantic palette mappings
+:PROPERTIES:
+:CUSTOM_ID: h:7bc489b4-18ab-41d8-8537-f50b9f4c592c
+:END:
+
+Modus has always had a more comprehensive palette than Ef. Now they
+are on par. Concretely, this means that users can customise more of
+the theme's style to their liking. Use the commands that list/preview
+a palette to learn about all the available options.
+
+The manual of the Modus themes covers the palette and user-defined
+overrides at great length. It also includes code samples that you can
+use as a starting point. And if something is unclear, you are welcome
+to contact me.
+
+** Many more faces are covered
+:PROPERTIES:
+:CUSTOM_ID: h:db1afef9-d83b-4c6c-aed1-f6fb419e725b
+:END:
+
+The wide face/package coverage of Modus is now inherited by the Ef
+themes. If some interface you are using does not look right, then the
+underlying faces are probably not supported yet. Contact me and I will
+take care of it right away.
+
+* Version 1.11.0 on 2025-09-25
+:PROPERTIES:
+:CUSTOM_ID: h:e402f5e0-4911-426e-9e77-e50ba01593f8
+:END:
+
+This version introduces minor refinements to a stable package.
+
+** Support for faces added to Emacs 31
+:PROPERTIES:
+:CUSTOM_ID: h:bc6a0cd6-d28c-44be-92b0-edee8fd10ec7
+:END:
+
+Emacs 31 is the current development target of Emacs. The new faces are
+~header-line-inactive~, ~package-mark-delete-face~, ~package-mark-install-face~,
+~minibuffer-nonselected~.
+
+** Mode lines are a bit easier to spot
+:PROPERTIES:
+:CUSTOM_ID: h:9a4f39cc-96c1-494d-966f-a8aaa0c99ac1
+:END:
+
+The active and inactive mode lines now have a subtle box/border around
+them on graphical Emacs. In non-graphical sessions, an underline is
+applied instead. This makes mode lines easier to stand out even when
+the buffer is showing a background that is of a similar colour to
+their own background.
+
+** The Custom interface buttons are more refined
+:PROPERTIES:
+:CUSTOM_ID: h:b56e656b-34d8-4124-8fa9-47c1697534ab
+:END:
+
+These are the buttons that appear in the Custom buffers that we reach
+through various means such as =M-x customize=. Like with the mode
+lines, they use a box/border around where possible, else fall back to
+an underline.
+
+** The current date in the =M-x calendar= always looks the same
+:PROPERTIES:
+:CUSTOM_ID: h:f8547b47-6b4e-4483-8596-c381bcf469b0
+:END:
+
+Before, it would look different if the Calendar was produced via =M-x
+calendar= as opposed to the Org date selection interface. This is
+because they apply different faces to the current date. Those are now
+reworked to look the same.
+
+** Notmuch message summary headers have clear dividers
+:PROPERTIES:
+:CUSTOM_ID: h:d07f2314-8b34-4cf7-a745-a362f5695a1e
+:END:
+
+In the Notmuch email client, the messages in a thread can be
+collapsed/minimised to just a heading. Those used to have only a
+subtle background, which would be enough to differentiate them from
+the body of the email but not from each other when all were collapsed.
+Now the themes add an overline to each heading, if supported by the
+underlying display engine (i.e. graphical Emacs), which should make it
+easier to spot them.
+
+** Links in the header line of Info buffers do not have an underline
+:PROPERTIES:
+:CUSTOM_ID: h:e79167ed-9fac-4bfb-96af-8558ea2d5594
+:END:
+
+This is because the header line has a distinct background already, so
+we want to avoid exaggerations.
+
+** The commands ~ef-themes-rotate~ and ~ef-themes-load-random~ can be silent
+:PROPERTIES:
+:CUSTOM_ID: h:3dc317e5-5e00-4528-8a2e-38c26940e0bc
+:END:
+
+They now accept an optional =SILENT= parameter that inhibits the
+message they otherwise print. Thanks to Sean Devlin for the
+contribution in pull request 59: <https://github.com/protesilaos/ef-themes/pull/59>.
+
+Note that any function can be silenced with something like this:
+
+#+begin_src emacs-lisp
+(defun my-wrapper-of-some-function ()
+  (let ((inhibit-message t))
+    (some-function)))
+#+end_src
+
+* Version 1.10.0 on 2025-04-29
+:PROPERTIES:
+:CUSTOM_ID: h:728b510a-3e93-433f-9c3c-582f716321f9
+:END:
+
+This version introduces minor refinements to an already stable
+package.
+
+** The palette preview uses a tabulated interface
+:PROPERTIES:
+:CUSTOM_ID: h:2db8bd88-b941-4c55-b8c3-f54a85666def
+:END:
+
+The commands ~ef-themes-preview-colors~ and ~ef-themes-preview-colors-current~
+produce a preview of the given theme's palette. In the past, we were
+using a bespoke buffer for this task, just how the built-in command
+~list-colors-display~ does it.
+
+Now we rely on the built-in ~tabulated-list-mode~ to get a cleaner
+tabulated view. Plus, users can sort by column.
+
+** Support for more faces or face groups
+:PROPERTIES:
+:CUSTOM_ID: h:296dadf4-a87d-4cf1-8058-959f65dfc2b4
+:END:
+
+- Added support for my ~tmr~ package. This will be especially
+  noticeable in its tabulated view (used to show timers, with the
+  command ~tmr-tabulated-view~ (alias ~tmr-list-timers~)).
+
+- Added explicit support for my ~spacious-padding~ package.
+  Specifically, this is for the faces ~spacious-padding-subtle-mode-line-active~
+  and ~spacious-padding-subtle-mode-line-inactive~. Those can be
+  configured as part of the user option ~spacious-padding-subtle-mode-line~.
+
+  #+begin_src emacs-lisp
+  (setq spacious-padding-subtle-mode-line
+        '( :mode-line-active spacious-padding-subtle-mode-line-active
+           :mode-line-inactive spacious-padding-subtle-mode-line-inactive))
+  #+end_src
+
+- Made the ~helpful~ headings use whatever the style of level 1
+  headings is, as defined by the user option ~ef-themes-heading~.
+  Thanks to John Haman for applying the relevant code we have for the
+  ~modus-themes~. The change is small (and comes from my ~modus-themes~,
+  anyway), meaning that John does not need to assign copyright to the
+  Free Software Foundation.
+
+- Added support for the ~howm~ package.
+
+- Extended support for the ~auto-dim-other-buffers~ package to include
+  its ~auto-dim-other-buffers-hide-face~.
+
+- Made sure that all new ~transient~ faces conform with the design
+  priorities of the themes. Concretely, this means that they do not
+  support any colour-coding: all keys look the same, regardless of
+  whether they mean "continue", "exit", or anything else.
+  Colour-coding with a full spectrum of colours cannot be accessible
+  (and I do not believe colour-coding alone even works because the
+  colours have nothing else to be associated with, like how a red line
+  in a diff buffer also goes together with the minus sign).
+
+  Thanks to Kevin Fleming for including the ~transient-key-stack~ face
+  that I had originally missed. This was done in pull request 54:
+  <https://github.com/protesilaos/ef-themes/pull/54>. The change is
+  small, meaning that Kevin does not need to assign copyright to the
+  Free Software Foundation
+
+- Extended support for ~adoc-mode~ courtesy of Leilei332. This was
+  done in pull request 52: <https://github.com/protesilaos/ef-themes/pull/52>.
+
+  The change is within the ~15-line limit, meaning that its author does
+  not need to assign copyright to the Free Software Foundation.
 
 * Version 1.9.0 on 2024-11-16
 :PROPERTIES:
@@ -2322,7 +2718,7 @@ plans with the =ef-themes= and how maintainable the project is:
 <https://lists.gnu.org/archive/html/emacs-devel/2022-10/msg00060.html>.
 
 #+begin_example message
-From: Protesilaos Stavrou <info@protesilaos.com>
+From: Protesilaos <info@protesilaos.com>
 To: Philip Kaludercic <philipk@posteo.net>, emacs-devel@gnu.org
 Subject: Re: [elpa] externals/ef-themes b6fc326946: Add ef-bio theme
 Date: Sun, 02 Oct 2022 15:18:28 +0300
@@ -2334,8 +2730,8 @@ Date: Sun, 02 Oct 2022 15:18:28 +0300
 >
 >> branch: externals/ef-themes
 >> commit b6fc32694646c65adbf1ed6d3d7bfddf55e16273
->> Author: Protesilaos Stavrou <info@protesilaos.com>
->> Commit: Protesilaos Stavrou <info@protesilaos.com>
+>> Author: Protesilaos <info@protesilaos.com>
+>> Commit: Protesilaos <info@protesilaos.com>
 >>
 >>     Add ef-bio theme
 >>
@@ -2530,7 +2926,7 @@ scale and will make things unmaintainable.
 #+begin_src diff
 From 30506843a9692c6539de79d819b63f328dbb5638 Mon Sep 17 00:00:00 2001
 Message-Id: <30506843a9692c6539de79d819b63f328dbb5638.1663662345.git.info@protesilaos.com>
-From: Protesilaos Stavrou <info@protesilaos.com>
+From: Protesilaos <info@protesilaos.com>
 Date: Tue, 20 Sep 2022 11:25:15 +0300
 Subject: [PATCH] Add user option for intense region
 
@@ -2803,7 +3199,7 @@ on those resources:
 #+begin_src diff
 From 35f3ee6b9c5a8f15615be1ef75e58c8b27e3b633 Mon Sep 17 00:00:00 2001
 Message-Id: <35f3ee6b9c5a8f15615be1ef75e58c8b27e3b633.1663904476.git.info@protesilaos.com>
-From: Protesilaos Stavrou <info@protesilaos.com>
+From: Protesilaos <info@protesilaos.com>
 Date: Fri, 23 Sep 2022 06:07:12 +0300
 Subject: [PATCH] Revise base backgrounds in all dark themes (DRAFT)
 
