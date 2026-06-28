@@ -344,5 +344,8 @@ Ef themes."
     (unless (file-equal-p dir (expand-file-name "themes/" data-directory))
       (add-to-list 'custom-theme-load-path dir))))
 
+;;;; Fork: keep the pre-2.0 Org, Magit and Magit Section appearance
+(require 'ef-themes-legacy-faces)
+
 (provide 'ef-themes)
 ;;; ef-themes.el ends here
