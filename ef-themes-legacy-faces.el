@@ -36,7 +36,6 @@
 (require 'modus-themes)
 
 ;; Defined in `ef-themes', which is loaded before this file.
-(defvar ef-themes-items)
 (defvar ef-themes-dark-themes)
 
 ;; `modus-themes-with-colors' evaluates its body with `eval', outside the
@@ -49,14 +48,20 @@
 (defvar ef-themes-legacy-faces--fg-intense nil
   "Replacement for the removed `fg-intense' palette color.")
 
+(defvar ef-themes-legacy-faces-themes '(ef-light)
+  "Ef themes for which the pre-2.0 legacy faces are restored.
+Only themes listed here keep the old Org, Magit and Magit Section
+appearance; every other theme uses the Modus-derived faces.")
+
 (defun ef-themes-legacy-faces--apply (&optional theme &rest _)
   "Re-apply the pre-2.0 Ef faces for Org, Magit, and Magit Section.
 THEME is the theme being enabled, as passed by `enable-theme-functions'.
 The faces are applied only when THEME -- or, failing that, the current
-theme -- is an Ef theme, and are attached to that theme so that they are
-removed when it is disabled."
-  (when-let* ((theme (or (car (memq theme ef-themes-items))
-                         (car (seq-intersection custom-enabled-themes ef-themes-items)))))
+theme -- is listed in `ef-themes-legacy-faces-themes', and are attached
+to that theme so that they are removed when it is disabled."
+  (when-let* ((theme (or (car (memq theme ef-themes-legacy-faces-themes))
+                         (car (seq-intersection custom-enabled-themes
+                                                ef-themes-legacy-faces-themes)))))
     (let ((ef-themes-legacy-faces--theme theme)
           (ef-themes-legacy-faces--fg-intense
            (if (memq theme ef-themes-dark-themes) "#ffffff" "#000000")))
